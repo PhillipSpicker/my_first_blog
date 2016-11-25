@@ -4,11 +4,80 @@
     <title>Blog</title>
     <%= csrf_meta_tags %>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
 
-  <body>
-    <%= yield %>
+  <body data-spy="scroll" data-target=".navbar">
+  <!--navbar starts here-->
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <!-- Sidebar -->
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+          <a href="#">Website</a>
+        </li>
+        <li>
+          <%=link_to "Blog", root_path %>
+        </li>
+        <li>
+          <a href="#">About</a>
+        </li>
+        <li>
+          <a href="#">Facebook</a>
+        </li>
+        <li>
+          <a href="#">Instagram</a>
+        </li>
+        <li>
+          <a href="#">Twitter</a>
+        </li>
+        <li class="sidebar-login">
+          <a href="#">Admin Login</a>
+        </li>
+      </ul>
+    </div>
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+    <div class="header">
+      <p class="link-button"> <%=link_to "New Post", new_post_path %> </p>
+      <p class="link-button"> Logout </p>
+    </div>
+  	
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h1>Page Welcome Title</h1>
+              <p><a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a></p>
+              <% flash.each do |name, msg| %>
+                <%= content_tag(:div, msg, class:"alert") %>
+              <% end %>
+              
+              
+              <%= yield %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- /#page-content-wrapper -->
+  </div> <!-- wrapper-->
+
+
+  <!-- Menu Toggle Script -->
+  <script>
+  $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+  </script>
   </body>
 </html>
