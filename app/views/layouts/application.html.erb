@@ -38,16 +38,20 @@
         <li>
           <a href="#">Twitter</a>
         </li>
+        <% if !user_signed_in? %>
         <li class="sidebar-login">
-          <a href="#">Admin Login</a>
+          <p> <%= link_to "Admin Login", new_user_session_path %> </p>
         </li>
+        <% end %>
       </ul>
     </div>
   <!-- /#sidebar-wrapper -->
   <!-- Page Content -->
     <div class="header">
-      <p class="link-button"> <%=link_to "New Post", new_post_path %> </p>
-      <p class="link-button"> Logout </p>
+      <% if user_signed_in? %>
+        <p class="link-button"> <%=link_to "New Post", new_post_path %> </p>
+        <p class="link-button"> <%= link_to("Log Out", destroy_user_session_path, method: :delete) %>﻿ </p>
+      <% end %>
     </div>
   	
     <div id="page-content-wrapper">
@@ -60,7 +64,7 @@
             <% elsif current_page?(about_path) %>
               <h1>About</h1>
             <% else %>
-              <%= link_back to "Back to all posts", root_path %>
+              <%= link_to "Back to all posts", root_path %>
             <% end %>
 
 
